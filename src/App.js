@@ -18,6 +18,10 @@ class App extends Component {
   newlyAddedTask = (newlyAddedTask) => {
     this.setState({
       newlyAddedTask: newlyAddedTask
+    }, () => {
+      this.setState({
+        newlyAddedTask: ""
+      })
     })
   }
 
