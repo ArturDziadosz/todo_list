@@ -1,12 +1,14 @@
 footer.container {
     height: 50px;
     .row {
+        align-items: center;
         .footer__text {
             text-align: center;
         }
         button {
             position: absolute;
             right: 0;
+            bottom: 0;
         }
     }
 }
