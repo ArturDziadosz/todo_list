@@ -1,0 +1,12 @@
+footer.container {
+    height: 50px;
+    .row {
+        .footer__text {
+            text-align: center;
+        }
+        button {
+            position: absolute;
+            right: 0;
+        }
+    }
+}

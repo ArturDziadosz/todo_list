@@ -11,7 +11,7 @@ $singleColWidth: 100%/($numOfColumns);
     margin: 0 auto;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     [class*='col-'] {
       min-height: 1px;
