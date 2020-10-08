@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 
 import './ToDoList.scss';
+import TDHeader from './TD/TDHeader';
 import TDElement from './TD/TDElement';
+import TDPagination from './TD/TDPagination';
 
 class ToDoList extends Component {
 
@@ -27,7 +29,9 @@ class ToDoList extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.newlyAddedTask !== prevProps.newlyAddedTask) {
-      this.addTask();
+      if (this.props.newlyAddedTask !== "") {
+        this.addTask();
+      }
     }
   }
 
@@ -64,6 +68,7 @@ class ToDoList extends Component {
       <>
         <section className={"row row__tdList"}>
           <ul className={"tdList"}>
+            <TDHeader />
             {
               this.state.tdList.map((task,index) => {
                 return (
@@ -71,6 +76,7 @@ class ToDoList extends Component {
                 )
               })
             }
+            <TDPagination />
           </ul>
         </section>
       </>
