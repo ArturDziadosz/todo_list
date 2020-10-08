@@ -8,7 +8,11 @@
 }
 
 body {
-  //   variables
+  font-size: $fontSize;
+  font-family: $font;
+  line-height: $lineHeight;
+  font-weight: $fontWeight;
+  background-color: $colorBG;
 }
 
 a {
