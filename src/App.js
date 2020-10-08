@@ -10,7 +10,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.formRef = React.createRef();
     this.state = {
       newlyAddedTask: ""
     }
@@ -28,7 +27,7 @@ class App extends Component {
       <>
         <Header />
         <main className={"container"}>
-          <Form handleAtParent={this.newlyAddedTask}/>
+          <Form handleAtParent={e => this.newlyAddedTask(e)}/>
           <ToDoList newlyAddedTask={this.state.newlyAddedTask}/>
         </main>
         <Footer />

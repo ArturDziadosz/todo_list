@@ -33,7 +33,7 @@ class Form extends Component {
   render() {
     return (
       <>
-        <form className={"row row__form"} onSubmit={ e => this.handleSubmit(e)}>
+        <form className={"row row__form"} onSubmit={e => this.handleSubmit(e)}>
           <TextField  className={"col-9"} 
                       variant={"outlined"}
                       autoFocus={true}
