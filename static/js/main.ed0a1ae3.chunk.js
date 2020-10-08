@@ -1,2 +1,0 @@
-(this.webpackJsonptodo_list=this.webpackJsonptodo_list||[]).push([[0],[,,,function(t,n,e){t.exports=e(10)},,,,,function(t,n,e){},function(t,n,e){},function(t,n,e){"use strict";e.r(n);var o=e(0),i=e.n(o),c=e(2),r=e.n(c);e(8),e(9);var a=function(){return i.a.createElement("div",null,"Initial commit")};r.a.render(i.a.createElement(i.a.StrictMode,null,i.a.createElement(a,null)),document.getElementById("root"))}],[[3,1,2]]]);
-//# sourceMappingURL=main.ed0a1ae3.chunk.js.map
