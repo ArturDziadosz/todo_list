@@ -8,13 +8,28 @@ import Footer from './components/Footer';
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.formRef = React.createRef();
+    this.state = {
+      newlyAddedTask: ""
+    }
+  }
+
+  newlyAddedTask = (newlyAddedTask) => {
+    this.setState({
+      newlyAddedTask: newlyAddedTask
+    })
+  }
+
   render () {
+
     return (
       <>
         <Header />
         <main className={"container"}>
-          <Form />
-          <ToDoList />
+          <Form handleAtParent={this.newlyAddedTask}/>
+          <ToDoList newlyAddedTask={this.state.newlyAddedTask}/>
         </main>
         <Footer />
       </>
