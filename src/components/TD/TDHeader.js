@@ -61,8 +61,8 @@ class TDHeader extends Component {
           </div>
           <div className={"col-2"}>
             <p onClick={e => this.handleSort(e)} data-sort={"descent"}>Priority</p>
-            <p style={this.state.activeFilter.ascentPriority ? {"display": "block"} : {"display": "none"}}>descent</p>
-            <p style={this.state.activeFilter.descentPriority ? {"display": "block"} : {"display": "none"}}>ascent</p>
+            <p style={this.state.activeFilter.ascentPriority ? {"display": "block"} : {"display": "none"}}>ascent</p>
+            <p style={this.state.activeFilter.descentPriority ? {"display": "block"} : {"display": "none"}}>descent</p>
           </div>
           <div className={"col-2"}>
             <p onClick={e => this.handleSort(e)} data-sort={"notChecked"}>Done</p>
