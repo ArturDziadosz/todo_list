@@ -11,6 +11,10 @@ class ToDoList extends Component {
     super(props)
     this.state = {
       tdList: [],
+      filter: {
+        azFilter: false,
+        zaFilter: false
+      }
     }
   }
 
@@ -36,6 +40,13 @@ class ToDoList extends Component {
   }
 
   addTask = () => {
+    this.setState({
+      filter: {
+        azFilter: false,
+        zaFilter: false
+      }
+    })
+    
     const task = {
       text: this.props.newlyAddedTask.inputValue,
       priority: this.props.newlyAddedTask.priority,
@@ -83,12 +94,71 @@ class ToDoList extends Component {
     localStorage.setItem("storedList", JSON.stringify(storedList));
   }
 
+  sort = filter => {
+    switch (filter) {
+      case "az":
+        this.setState({
+          filter: {
+            azFilter: true,
+            zaFilter: false
+          }
+        });
+      break;
+      case "za":
+        this.setState({
+          filter: {
+            azFilter: false,
+            zaFilter: true
+          }
+        });
+      break;
+      default:
+        this.setState({
+          filter: {
+            azFilter: false,
+            zaFilter: false,
+          }
+        });
+    }    
+  }
+
   render() {
+
+    if (this.state.filter.azFilter) {
+      this.state.tdList.sort((a, b) => {
+        const nameA = a.text;
+        const nameB = b.text;
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+    }
+
+    if (this.state.filter.zaFilter) {
+      this.state.tdList.sort((a, b) => {
+        const nameA = a.text;
+        const nameB = b.text;
+        if (nameA > nameB) {
+          return -1;
+        }
+        if (nameA < nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+    }
+
     return (
       <>
         <section className={"row row__tdList"}>
           <ul className={"tdList"}>
-            <TDHeader />
+            <TDHeader handleAtParentSort={this.sort} activeFilter={this.state.filter}/>
             {
               this.state.tdList.map((task,index) => {
                 return (
