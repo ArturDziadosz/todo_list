@@ -34,7 +34,7 @@ class Form extends Component {
     return (
       <>
         <form className={"row row__form"} onSubmit={e => this.handleSubmit(e)}>
-          <TextField  className={"col-9"} 
+          <TextField  className={"col-10"} 
                       variant={"outlined"}
                       autoFocus={true}
                       label={"Add new task"}

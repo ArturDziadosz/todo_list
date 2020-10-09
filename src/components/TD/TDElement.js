@@ -41,12 +41,13 @@ class TDElement extends Component {
     return (
       <>
         <li className={this.state.checked ? "tdList__element tdList__element--checked" : "tdList__element"} >
-            <p>{this.props.task.text}</p>
+            <p className={"col-8"}>{this.props.task.text}</p>
             <input  type={"checkbox"} 
                     name={"checked"} 
                     onClick={e => this.handleChange(e)} 
                     data-key={this.props.index}
                     checked={this.state.checked}
+                    className={"col-2"}
             />
             <button type={"button"}
                     data-key={this.props.index}

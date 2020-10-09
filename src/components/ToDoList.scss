@@ -2,6 +2,10 @@ main.container {
   .row__tdList {
     .tdList {
       list-style: none;
+      width: 100%;
+      margin: 20px 0;
+      border: 1px solid black;
+      border-radius: 5px 5px;
     }
   }
 }
