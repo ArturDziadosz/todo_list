@@ -28,8 +28,8 @@ class ToDoList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.newlyAddedTask !== prevProps.newlyAddedTask) {
-      if (this.props.newlyAddedTask !== "") {
+    if (this.props.newlyAddedTask.inputValue !== prevProps.newlyAddedTask.inputValue) {
+      if (this.props.newlyAddedTask.inputValue !== "") {
         this.addTask();
       }
     }
@@ -37,7 +37,8 @@ class ToDoList extends Component {
 
   addTask = () => {
     const task = {
-      text: this.props.newlyAddedTask,
+      text: this.props.newlyAddedTask.inputValue,
+      priority: this.props.newlyAddedTask.priority,
       isFinished: false
     };
 
@@ -73,6 +74,15 @@ class ToDoList extends Component {
     localStorage.setItem("storedList", JSON.stringify(storedList));
   }
 
+  changePriority = (index, priority) => {
+    const storedList = JSON.parse(localStorage.getItem("storedList"));
+    storedList[index].priority = priority;
+    this.setState({
+      tdList: storedList
+    })
+    localStorage.setItem("storedList", JSON.stringify(storedList));
+  }
+
   render() {
     return (
       <>
@@ -82,7 +92,13 @@ class ToDoList extends Component {
             {
               this.state.tdList.map((task,index) => {
                 return (
-                  <TDElement key={index} task={task} index={index} handleAtParentDelete={e => this.deleteTask(e)} handleAtParentIsFinished={(e,b) => this.toggleFinishTask(e,b)}/>
+                  <TDElement  key={index} 
+                              task={task} 
+                              index={index} 
+                              handleAtParentDelete={index => this.deleteTask(index)} 
+                              handleAtParentIsFinished={(index, boolean) => this.toggleFinishTask(index, boolean)} 
+                              handleAtParentPriority={(index, priority) => this.changePriority(index, priority)}
+                  />
                 )
               })
             }

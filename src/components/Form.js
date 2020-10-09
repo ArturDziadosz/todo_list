@@ -10,6 +10,7 @@ class Form extends Component {
     super(props);
     this.state = {
       inputValue: "",
+      priority: "Low"
     }
   }
 
@@ -18,7 +19,7 @@ class Form extends Component {
     if (this.state.inputValue === "") {
       return null
     }
-    this.props.handleAtParent(this.state.inputValue.trim());
+    this.props.handleAtParent(this.state.inputValue.trim(), this.state.priority);
     this.setState({
       inputValue: ""
     })
@@ -33,15 +34,19 @@ class Form extends Component {
   render() {
     return (
       <>
-        <form className={"row row__form"} onSubmit={e => this.handleSubmit(e)}>
-          <TextField  className={"col-10"} 
+        <form className={"row row__form"} onSubmit={(inputValue, priority) => this.handleSubmit(inputValue, priority)}>
+          <TextField  className={"col-8"} 
                       variant={"outlined"}
                       autoFocus={true}
                       label={"Add new task"}
                       name={"inputValue"}
                       onChange={e => this.handleChange(e)}
                       value={this.state.inputValue} />
-          {/* TODO List of priority */}
+          <select className={"col-2"} name={"priority"} onChange={e => this.handleChange(e)}>
+            <option value={"Low"}>Low</option>
+            <option value={"Medium"}>Medium</option>
+            <option value={"High"}>High</option>
+          </select>
           <Button className={"col-2"} variant={"contained"} color={"primary"} type={"submit"}>
             <i className="fas fa-plus"></i>
           </Button>

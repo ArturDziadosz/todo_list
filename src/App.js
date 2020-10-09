@@ -11,16 +11,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newlyAddedTask: ""
+      newlyAddedTask: {
+        inputValue: "",
+        priority: ""
+      }
     }
   }
 
-  newlyAddedTask = (newlyAddedTask) => {
+  newlyAddedTask = (inputValue, priority) => {
     this.setState({
-      newlyAddedTask: newlyAddedTask
+      newlyAddedTask: {
+        inputValue: inputValue,
+        priority: priority
+      }
     }, () => {
       this.setState({
-        newlyAddedTask: ""
+        newlyAddedTask: {
+          inputValue: "",
+          priority: priority
+        }
       })
     })
   }
@@ -31,7 +40,7 @@ class App extends Component {
       <>
         <Header />
         <main className={"container"}>
-          <Form handleAtParent={e => this.newlyAddedTask(e)}/>
+          <Form handleAtParent={(inputValue, priority) => this.newlyAddedTask(inputValue, priority)}/>
           <ToDoList newlyAddedTask={this.state.newlyAddedTask}/>
         </main>
         <Footer />

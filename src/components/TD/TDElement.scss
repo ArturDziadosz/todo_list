@@ -24,10 +24,9 @@ main.container {
         }
       }
 
-      .tdList__element--checked {
-        text-decoration: line-through;
-                
+      .tdList__element--checked { 
         p {
+          text-decoration: line-through;
           opacity: 0.5;
         }
       }
