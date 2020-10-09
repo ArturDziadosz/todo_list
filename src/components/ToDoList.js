@@ -13,7 +13,9 @@ class ToDoList extends Component {
       tdList: [],
       filter: {
         azFilter: false,
-        zaFilter: false
+        zaFilter: false,
+        ascentPriority: false,
+        descentPriority: false
       }
     }
   }
@@ -43,10 +45,12 @@ class ToDoList extends Component {
     this.setState({
       filter: {
         azFilter: false,
-        zaFilter: false
+        zaFilter: false,
+        ascentPriority: false,
+        descentPriority: false
       }
     })
-    
+
     const task = {
       text: this.props.newlyAddedTask.inputValue,
       priority: this.props.newlyAddedTask.priority,
@@ -100,7 +104,9 @@ class ToDoList extends Component {
         this.setState({
           filter: {
             azFilter: true,
-            zaFilter: false
+            zaFilter: false,
+            ascentPriority: false,
+            descentPriority: false
           }
         });
       break;
@@ -108,7 +114,29 @@ class ToDoList extends Component {
         this.setState({
           filter: {
             azFilter: false,
-            zaFilter: true
+            zaFilter: true,
+            ascentPriority: false,
+            descentPriority: false
+          }
+        });
+      break;
+      case "ascent":
+        this.setState({
+          filter: {
+            azFilter: false,
+            zaFilter: false,
+            ascentPriority: true,
+            descentPriority: false
+          }
+        });
+      break;
+      case "descent":
+        this.setState({
+          filter: {
+            azFilter: false,
+            zaFilter: false,
+            ascentPriority: false,
+            descentPriority: true
           }
         });
       break;
@@ -117,6 +145,8 @@ class ToDoList extends Component {
           filter: {
             azFilter: false,
             zaFilter: false,
+            ascentPriority: false,
+            descentPriority: false
           }
         });
     }    
@@ -147,6 +177,48 @@ class ToDoList extends Component {
           return -1;
         }
         if (nameA < nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+    }
+
+    if (this.state.filter.ascentPriority) {
+      const priorities = {
+        "High": 0,
+        "Medium": 1,
+        "Low": 2
+      };
+
+      this.state.tdList.sort((a, b) => {
+        const priorityA = priorities[a.priority];
+        const priorityB = priorities[b.priority];
+        if (priorityA > priorityB) {
+          return -1;
+        }
+        if (priorityA < priorityB) {
+          return 1;
+        }
+        return 0;
+      });
+      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+    }
+
+    if (this.state.filter.descentPriority) {
+      const priorities = {
+        "High": 0,
+        "Medium": 1,
+        "Low": 2
+      };
+
+      this.state.tdList.sort((a, b) => {
+        const priorityA = priorities[a.priority];
+        const priorityB = priorities[b.priority];
+        if (priorityA < priorityB) {
+          return -1;
+        }
+        if (priorityA > priorityB) {
           return 1;
         }
         return 0;

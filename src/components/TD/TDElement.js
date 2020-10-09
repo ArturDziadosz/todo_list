@@ -15,7 +15,8 @@ class TDElement extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.task !== prevProps.task) {
       this.setState({
-        checked: this.props.task.isFinished
+        checked: this.props.task.isFinished,
+        priority: this.props.task.priority
       })
     }
   }
