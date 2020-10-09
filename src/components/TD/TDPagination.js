@@ -87,7 +87,7 @@ class TDPagination extends Component {
             </select>
 
           </li>
-          <li>{indexOfFirst+1} - {indexOfLastTask} of {this.state.tdList.length}</li>
+          <li>{this.state.tdList.length === 0 ? indexOfFirst : indexOfFirst+1} - {indexOfLastTask} of {this.state.tdList.length}</li>
           <button onClick={e => this.handlePageDown(e)}>{"<"}</button>
           <button onClick={e => this.handlePageUp(e)}>{">"}</button>
         </ul>
