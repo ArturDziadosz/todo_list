@@ -18,8 +18,10 @@ class ToDoList extends Component {
         descentPriority: false,
         checked: false,
         notChecked: false
-      }
+      },
+      viewedTDList: []
     }
+    this.paginationRef = React.createRef();
   }
 
   componentDidMount() {
@@ -103,6 +105,9 @@ class ToDoList extends Component {
   }
 
   sort = filter => {
+    const indexOfLast = this.paginationRef.current.state.currentPage * this.paginationRef.current.state.tasksPerPage;
+    const indexOfFirst = indexOfLast - this.paginationRef.current.state.tasksPerPage;
+
     switch (filter) {
       case "az":
         this.setState({
@@ -112,6 +117,8 @@ class ToDoList extends Component {
             ascentPriority: false,
             descentPriority: false
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
       case "za":
@@ -122,6 +129,8 @@ class ToDoList extends Component {
             ascentPriority: false,
             descentPriority: false
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
       case "ascent":
@@ -132,6 +141,8 @@ class ToDoList extends Component {
             ascentPriority: true,
             descentPriority: false
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
       case "descent":
@@ -142,6 +153,8 @@ class ToDoList extends Component {
             ascentPriority: false,
             descentPriority: true
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
       case "checked":
@@ -154,6 +167,8 @@ class ToDoList extends Component {
             checked: true,
             notChecked: false
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
       case "notChecked":
@@ -166,6 +181,8 @@ class ToDoList extends Component {
             checked: false,
             notChecked: true
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
       default:
@@ -178,8 +195,16 @@ class ToDoList extends Component {
             checked: false,
             notChecked: false
           }
+        }, () => {
+          this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
-    }    
+    }
+  }
+
+  changeView = viewedTasks => {
+    this.setState({
+      viewedTDList: viewedTasks
+    })
   }
 
   render() {
@@ -302,7 +327,7 @@ class ToDoList extends Component {
           <ul className={"tdList"}>
             <TDHeader handleAtParentSort={this.sort} activeFilter={this.state.filter}/>
             {
-              this.state.tdList.map((task,index) => {
+              this.state.viewedTDList.map((task,index) => {
                 return (
                   <TDElement  key={index} 
                               task={task} 
@@ -314,7 +339,7 @@ class ToDoList extends Component {
                 )
               })
             }
-            <TDPagination />
+            <TDPagination tdList={this.state.tdList} handleAtParent={viewedTasks => this.changeView(viewedTasks)} ref={this.paginationRef}/>
           </ul>
         </section>
       </>
