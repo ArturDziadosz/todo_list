@@ -37,6 +37,14 @@ class TDHeader extends Component {
         e.target.dataset.sort = "descent";
         this.props.handleAtParentSort(e.target.dataset.sort);
       break;
+      case "checked":
+        e.target.dataset.sort = "notChecked";
+        this.props.handleAtParentSort(e.target.dataset.sort);
+      break;
+      case "notChecked":
+        e.target.dataset.sort = "checked";
+        this.props.handleAtParentSort(e.target.dataset.sort);
+      break;
       default:
         console.log("switch error");
     }
@@ -53,9 +61,13 @@ class TDHeader extends Component {
           </div>
           <div className={"col-2"}>
             <p onClick={e => this.handleSort(e)} data-sort={"descent"}>Priority</p>
+            <p style={this.state.activeFilter.ascentPriority ? {"display": "block"} : {"display": "none"}}>descent</p>
+            <p style={this.state.activeFilter.descentPriority ? {"display": "block"} : {"display": "none"}}>ascent</p>
           </div>
           <div className={"col-2"}>
-            <p>Done</p>
+            <p onClick={e => this.handleSort(e)} data-sort={"notChecked"}>Done</p>
+            <p style={this.state.activeFilter.checked ? {"display": "block"} : {"display": "none"}}>V</p>
+            <p style={this.state.activeFilter.notChecked ? {"display": "block"} : {"display": "none"}}>Not</p>
           </div>
         </li>
       </>

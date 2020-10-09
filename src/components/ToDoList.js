@@ -15,7 +15,9 @@ class ToDoList extends Component {
         azFilter: false,
         zaFilter: false,
         ascentPriority: false,
-        descentPriority: false
+        descentPriority: false,
+        checked: false,
+        notChecked: false
       }
     }
   }
@@ -47,7 +49,9 @@ class ToDoList extends Component {
         azFilter: false,
         zaFilter: false,
         ascentPriority: false,
-        descentPriority: false
+        descentPriority: false,
+        checked: false,
+        notChecked: false
       }
     })
 
@@ -63,7 +67,7 @@ class ToDoList extends Component {
       localStorage.setItem("storedList", JSON.stringify(tdList));
     } else {
       const tdList = JSON.parse(localStorage.getItem("storedList"));
-      tdList.push(task);
+      tdList.unshift(task);
       localStorage.setItem("storedList", JSON.stringify(tdList));
     }
     this.setState({
@@ -140,13 +144,39 @@ class ToDoList extends Component {
           }
         });
       break;
+      case "checked":
+        this.setState({
+          filter: {
+            azFilter: false,
+            zaFilter: false,
+            ascentPriority: false,
+            descentPriority: false,
+            checked: true,
+            notChecked: false
+          }
+        });
+      break;
+      case "notChecked":
+        this.setState({
+          filter: {
+            azFilter: false,
+            zaFilter: false,
+            ascentPriority: false,
+            descentPriority: false,
+            checked: false,
+            notChecked: true
+          }
+        });
+      break;
       default:
         this.setState({
           filter: {
             azFilter: false,
             zaFilter: false,
             ascentPriority: false,
-            descentPriority: false
+            descentPriority: false,
+            checked: false,
+            notChecked: false
           }
         });
     }    
@@ -219,6 +249,46 @@ class ToDoList extends Component {
           return -1;
         }
         if (priorityA > priorityB) {
+          return 1;
+        }
+        return 0;
+      });
+      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+    }
+
+    if (this.state.filter.checked) {
+      const priorities = {
+        true: 0,
+        false: 1
+      };
+
+      this.state.tdList.sort((a, b) => {
+        const priorityA = priorities[a.isFinished];
+        const priorityB = priorities[b.isFinished];
+        if (priorityA < priorityB) {
+          return -1;
+        }
+        if (priorityA > priorityB) {
+          return 1;
+        }
+        return 0;
+      });
+      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+    }
+
+    if (this.state.filter.notChecked) {
+      const priorities = {
+        true: 0,
+        false: 1
+      };
+
+      this.state.tdList.sort((a, b) => {
+        const priorityA = priorities[a.isFinished];
+        const priorityB = priorities[b.isFinished];
+        if (priorityA > priorityB) {
+          return -1;
+        }
+        if (priorityA < priorityB) {
           return 1;
         }
         return 0;
