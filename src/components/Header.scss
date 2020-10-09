@@ -1,9 +1,11 @@
 header.container {
-    height: 100px;
-        .row {
-            align-items: center;
-            .header__title {
-                text-align: center;
-            }
+  height: 100px;
+
+    .row {
+      align-items: center;
+      
+        .header__title {
+          text-align: center;
         }
+    }
 }

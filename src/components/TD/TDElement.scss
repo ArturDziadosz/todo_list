@@ -1,32 +1,32 @@
 main.container {
-    .row__tdList {
-        .tdList {
-            .tdList__element {
-                position: relative;
-                line-height: 50px;
+  .row__tdList {
+    .tdList {
+      .tdList__element {
+        position: relative;
+        line-height: 50px;
 
-                .tdList__element__deleteBtn {
-                    display: none;
-                    position: absolute;
-                    right: 0;
-                    bottom: 10px;
-                    margin: 5px;
-                }
-
-                &:hover {
-                    .tdList__element__deleteBtn {
-                        display: block;
-                    }
-                }
-            }
-
-            .tdList__element--checked {
-                text-decoration: line-through;
-                
-                p {
-                    opacity: 0.5;
-                }
-            }
+        .tdList__element__deleteBtn {
+          display: none;
+          position: absolute;
+          right: 0;
+          bottom: 10px;
+          margin: 5px;
         }
+
+        &:hover {
+          .tdList__element__deleteBtn {
+            display: block;
+          }
+        }
+      }
+
+      .tdList__element--checked {
+        text-decoration: line-through;
+                
+        p {
+          opacity: 0.5;
+        }
+      }
     }
+  }
 }

@@ -8,7 +8,7 @@ class TDPagination extends Component {
     return (
       <>
         <li>
-            Pagination
+          Pagination
         </li>
       </>
     )
