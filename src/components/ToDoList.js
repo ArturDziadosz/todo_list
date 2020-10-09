@@ -37,7 +37,8 @@ class ToDoList extends Component {
 
   addTask = () => {
     const task = {
-      text: this.props.newlyAddedTask
+      text: this.props.newlyAddedTask,
+      isFinished: false
     };
 
     if (localStorage.getItem("storedList") == null) {
@@ -63,6 +64,15 @@ class ToDoList extends Component {
     localStorage.setItem("storedList", JSON.stringify(storedList));
   }
 
+  toggleFinishTask = (index, boolean) => {
+    const storedList = JSON.parse(localStorage.getItem("storedList"));
+    storedList[index].isFinished = boolean;
+    this.setState({
+      tdList: storedList
+    })
+    localStorage.setItem("storedList", JSON.stringify(storedList));
+  }
+
   render() {
     return (
       <>
@@ -72,7 +82,7 @@ class ToDoList extends Component {
             {
               this.state.tdList.map((task,index) => {
                 return (
-                  <TDElement key={index} task={task} index={index} handleAtParent={e => this.deleteTask(e)} />
+                  <TDElement key={index} task={task} index={index} handleAtParentDelete={e => this.deleteTask(e)} handleAtParentIsFinished={(e,b) => this.toggleFinishTask(e,b)}/>
                 )
               })
             }
