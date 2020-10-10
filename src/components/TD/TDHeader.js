@@ -11,6 +11,7 @@ class TDHeader extends Component {
     }
   }
 
+  // updating state when new props come to show user active filter
   componentDidUpdate(prevProps) {
     if (this.props.activeFilter !== prevProps.activeFilter) {
       this.setState({
@@ -19,6 +20,7 @@ class TDHeader extends Component {
     }
   }
 
+  // passing to parent data with active filter
   handleSort = e => {
     switch (e.target.dataset.sort) {
       case "az":

@@ -13,6 +13,7 @@ class TDPagination extends Component {
     }
   }
 
+  // updating state with new list to add current pagination and pass data to parent element
   componentDidUpdate(prevProps) {
     if (this.props.tdList !== prevProps.tdList) {
       this.setState({
@@ -26,6 +27,7 @@ class TDPagination extends Component {
     }
   }
 
+  // go to previous page, with validation to not to go to page below first and passing data to parent element
   handlePageDown = () => {
     if (this.state.currentPage > "1") {
       this.setState(prevState => ({
@@ -39,6 +41,7 @@ class TDPagination extends Component {
     }
   }
 
+  // go to next page, with validation to not to go to page beyond last and passing data to parent element
   handlePageUp = () => {
     if (this.state.currentPage * this.state.tasksPerPage < this.state.tdList.length) {
       this.setState(prevState => ({
@@ -52,6 +55,7 @@ class TDPagination extends Component {
     }
   }
 
+  // controlling the select component, setting currentPage to first and passing data to parent element
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -65,32 +69,26 @@ class TDPagination extends Component {
   };
 
   render() {
+    const {currentPage, tasksPerPage, tdList} = this.state;
 
-    const indexOfLast = this.state.currentPage * this.state.tasksPerPage;
-    const indexOfFirst = indexOfLast - this.state.tasksPerPage;
-    const indexOfLastTask = Math.min(indexOfLast, this.state.tdList.length);
+    const indexOfLast = currentPage * tasksPerPage;
+    const indexOfFirst = indexOfLast - tasksPerPage;
+    const indexOfLastTask = Math.min(indexOfLast, tdList.length);
 
     return (
       <>
-        <ul>
-          <li>Rows per page: 
-            <select name={"tasksPerPage"} onChange={e => this.handleChange(e)}>
-              <option value={"5"}>
-                5
-              </option>
-              <option value={"10"}>
-                10
-              </option>
-              <option value={"15"}>
-                15
-              </option>
+        <li className={"tdList__footer"}>
+          <p>Rows per page: 
+            <select name={"tasksPerPage"} onChange={e => this.handleChange(e)} value={tasksPerPage}>
+              <option value={"5"}>5</option>
+              <option value={"10"}>10</option>
+              <option value={"15"}>15</option>
             </select>
-
-          </li>
-          <li>{this.state.tdList.length === 0 ? indexOfFirst : indexOfFirst+1} - {indexOfLastTask} of {this.state.tdList.length}</li>
+          </p>
+          <p>{tdList.length === 0 ? indexOfFirst : indexOfFirst+1} - {indexOfLastTask} of {tdList.length}</p>
           <button onClick={e => this.handlePageDown(e)}>{"<"}</button>
           <button onClick={e => this.handlePageUp(e)}>{">"}</button>
-        </ul>
+        </li>
       </>
     )
   }

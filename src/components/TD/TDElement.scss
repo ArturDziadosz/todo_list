@@ -2,6 +2,7 @@ main.container {
   .row__tdList {
     .tdList {
       .tdList__element {
+        background-color: #fff;
         position: relative;
         line-height: 50px;
         display: flex;
@@ -21,6 +22,15 @@ main.container {
           .tdList__element__deleteBtn {
             display: block;
           }
+        }
+
+        .tdList__element__warning {
+          position: absolute;
+          background-color: #fff;
+          color: red;
+          border: 1px solid red;
+          left: 0;
+          text-align: center;
         }
       }
 

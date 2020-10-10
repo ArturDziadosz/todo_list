@@ -18,6 +18,7 @@ class App extends Component {
     }
   }
 
+  // passing values from Form to ToDoList with clearing the state to be able to add the same value task
   newlyAddedTask = (inputValue, priority) => {
     this.setState({
       newlyAddedTask: {
@@ -27,8 +28,7 @@ class App extends Component {
     }, () => {
       this.setState({
         newlyAddedTask: {
-          inputValue: "",
-          priority: priority
+          inputValue: ""
         }
       })
     })

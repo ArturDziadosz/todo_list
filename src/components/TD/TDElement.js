@@ -13,6 +13,7 @@ class TDElement extends Component {
     }
   }
 
+  // updating state after getting new task or changed task
   componentDidUpdate(prevProps) {
     if (this.props.task !== prevProps.task) {
       this.setState({
@@ -22,6 +23,7 @@ class TDElement extends Component {
     }
   }
 
+  // passing index of element to parent to delete task, with validation if it's finished
   deleteTask = e => {
     if (this.state.checked === false) {
       if (this.state.deleteAreYouSure === true) {
@@ -37,6 +39,7 @@ class TDElement extends Component {
     }
   }
 
+  // handler for changing the finished status (true, false)
   handleChangeFinished = e => {
     const index = e.target.getAttribute("data-key");
     this.props.handleAtParentIsFinished(index, e.target.checked);
@@ -47,6 +50,7 @@ class TDElement extends Component {
     })
   }
 
+  // handler for changing priority
   handleChangePriority = e => {
     const index = e.target.getAttribute("data-key");
     this.props.handleAtParentPriority(index, e.target.value);
@@ -58,11 +62,13 @@ class TDElement extends Component {
   }
 
   render() {
+    const {priority, checked, deleteAreYouSure} = this.state;
+
     return (
       <>
-        <li className={this.state.checked ? "tdList__element tdList__element--checked" : "tdList__element"} >
+        <li className={checked ? "tdList__element tdList__element--checked" : "tdList__element"} >
             <p className={"col-8"}>{this.props.task.text}</p>
-            <select className={"col-2"} name={"priority"} data-key={this.props.index} onChange={e => this.handleChangePriority(e)} value={this.state.priority}>
+            <select className={"col-2"} name={"priority"} data-key={this.props.index} onChange={e => this.handleChangePriority(e)} value={priority}>
               <option value={"Low"}>Low</option>
               <option value={"Medium"}>Medium</option>
               <option value={"High"}>High</option>
@@ -71,10 +77,11 @@ class TDElement extends Component {
                     name={"checked"} 
                     onChange={e => this.handleChangeFinished(e)} 
                     data-key={this.props.index}
-                    checked={this.state.checked}
+                    checked={checked}
                     className={"col-2"}
+                    value={checked}
             />
-            {this.state.deleteAreYouSure ? <p>Still not done, are you sure you want to delete it?</p> : null}
+            {deleteAreYouSure ? <p className={"tdList__element__warning col-10"}>Still not done, are you sure you want to delete it?</p> : null}
             <button type={"button"}
                     data-key={this.props.index}
                     onClick={e => this.deleteTask(e)}

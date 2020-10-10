@@ -3,15 +3,16 @@ footer.container {
 
   .row {
     align-items: center;
+    position: relative;
 
     .footer__text {
       text-align: center;
+      line-height: 50px;
     }
 
     button {
-      position: absolute;
-      right: 0;
-      bottom: 0;
+      height: 30px;
+      border: 1px solid black;
     }
   }
 }

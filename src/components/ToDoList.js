@@ -24,6 +24,7 @@ class ToDoList extends Component {
     this.paginationRef = React.createRef();
   }
 
+  // loading stored list on loading app
   componentDidMount() {
     const storedList = window.localStorage.getItem("storedList");
     const parsedStoredList = JSON.parse(storedList);
@@ -37,6 +38,7 @@ class ToDoList extends Component {
     }
   }
 
+  // when new props comes in with new task invoking addTask function, with validation of input value
   componentDidUpdate(prevProps) {
     if (this.props.newlyAddedTask.inputValue !== prevProps.newlyAddedTask.inputValue) {
       if (this.props.newlyAddedTask.inputValue !== "") {
@@ -45,7 +47,9 @@ class ToDoList extends Component {
     }
   }
 
+  // adding new task to list in component state and local storage
   addTask = () => {
+    // disabling the sorting to add new task on top of the list
     this.setState({
       filter: {
         azFilter: false,
@@ -57,26 +61,31 @@ class ToDoList extends Component {
       }
     })
 
+    // new task has text, priority and it's not finished by default 
     const task = {
       text: this.props.newlyAddedTask.inputValue,
       priority: this.props.newlyAddedTask.priority,
       isFinished: false
     };
 
+    // checking if local storage has some data, adding new task and store it in local storage
     if (localStorage.getItem("storedList") == null) {
-      const tdList = [];
-      tdList.push(task);
-      localStorage.setItem("storedList", JSON.stringify(tdList));
+      const storedList = [];
+      storedList.push(task);
+      localStorage.setItem("storedList", JSON.stringify(storedList));
     } else {
-      const tdList = JSON.parse(localStorage.getItem("storedList"));
-      tdList.unshift(task);
-      localStorage.setItem("storedList", JSON.stringify(tdList));
+      const storedList = JSON.parse(localStorage.getItem("storedList"));
+      storedList.unshift(task);
+      localStorage.setItem("storedList", JSON.stringify(storedList));
     }
+
+    // updating state with updated local storage
     this.setState({
       tdList: JSON.parse(localStorage.getItem("storedList"))
     })
   }
 
+  // deleting task with splice method and updating state and local storage
   deleteTask = index => {
     const storedList = JSON.parse(localStorage.getItem("storedList"));
     storedList.splice(index,1);
@@ -86,6 +95,7 @@ class ToDoList extends Component {
     localStorage.setItem("storedList", JSON.stringify(storedList));
   }
 
+  // toggling the checkbox status with updating state and local storage
   toggleFinishTask = (index, boolean) => {
     const storedList = JSON.parse(localStorage.getItem("storedList"));
     storedList[index].isFinished = boolean;
@@ -95,6 +105,7 @@ class ToDoList extends Component {
     localStorage.setItem("storedList", JSON.stringify(storedList));
   }
 
+  // changing the priority of task with updating state and local storage
   changePriority = (index, priority) => {
     const storedList = JSON.parse(localStorage.getItem("storedList"));
     storedList[index].priority = priority;
@@ -104,10 +115,14 @@ class ToDoList extends Component {
     localStorage.setItem("storedList", JSON.stringify(storedList));
   }
 
+  // changing the active filter
   sort = filter => {
+    
+    // data needed to show sorted list depending on the pagination that it's in use
     const indexOfLast = this.paginationRef.current.state.currentPage * this.paginationRef.current.state.tasksPerPage;
     const indexOfFirst = indexOfLast - this.paginationRef.current.state.tasksPerPage;
 
+    // switch for maintaining the code easier
     switch (filter) {
       case "az":
         this.setState({
@@ -115,9 +130,12 @@ class ToDoList extends Component {
             azFilter: true,
             zaFilter: false,
             ascentPriority: false,
-            descentPriority: false
+            descentPriority: false,
+            checked: false,
+            notChecked: false
           }
         }, () => {
+          // after updating state with new filter invoke changeView function to show list according to pagination
           this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
         });
       break;
@@ -127,7 +145,9 @@ class ToDoList extends Component {
             azFilter: false,
             zaFilter: true,
             ascentPriority: false,
-            descentPriority: false
+            descentPriority: false,
+            checked: false,
+            notChecked: false
           }
         }, () => {
           this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
@@ -139,7 +159,9 @@ class ToDoList extends Component {
             azFilter: false,
             zaFilter: false,
             ascentPriority: true,
-            descentPriority: false
+            descentPriority: false,
+            checked: false,
+            notChecked: false
           }
         }, () => {
           this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
@@ -151,7 +173,9 @@ class ToDoList extends Component {
             azFilter: false,
             zaFilter: false,
             ascentPriority: false,
-            descentPriority: true
+            descentPriority: true,
+            checked: false,
+            notChecked: false
           }
         }, () => {
           this.changeView(this.state.tdList.slice(indexOfFirst, indexOfLast));
@@ -201,6 +225,7 @@ class ToDoList extends Component {
     }
   }
 
+  // changing the view depending on current pagination
   changeView = viewedTasks => {
     this.setState({
       viewedTDList: viewedTasks
@@ -208,9 +233,11 @@ class ToDoList extends Component {
   }
 
   render() {
+    const {tdList, filter, viewedTDList} = this.state;
 
-    if (this.state.filter.azFilter) {
-      this.state.tdList.sort((a, b) => {
+    // sorting the task list depending on the active filter and updating the local storage
+    if (filter.azFilter) {
+      tdList.sort((a, b) => {
         const nameA = a.text;
         const nameB = b.text;
         if (nameA < nameB) {
@@ -221,11 +248,11 @@ class ToDoList extends Component {
         }
         return 0;
       });
-      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+      localStorage.setItem("storedList", JSON.stringify(tdList));
     }
 
-    if (this.state.filter.zaFilter) {
-      this.state.tdList.sort((a, b) => {
+    if (filter.zaFilter) {
+      tdList.sort((a, b) => {
         const nameA = a.text;
         const nameB = b.text;
         if (nameA > nameB) {
@@ -236,17 +263,17 @@ class ToDoList extends Component {
         }
         return 0;
       });
-      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+      localStorage.setItem("storedList", JSON.stringify(tdList));
     }
 
-    if (this.state.filter.ascentPriority) {
+    if (filter.ascentPriority) {
       const priorities = {
         "High": 0,
         "Medium": 1,
         "Low": 2
       };
 
-      this.state.tdList.sort((a, b) => {
+      tdList.sort((a, b) => {
         const priorityA = priorities[a.priority];
         const priorityB = priorities[b.priority];
         if (priorityA > priorityB) {
@@ -257,17 +284,17 @@ class ToDoList extends Component {
         }
         return 0;
       });
-      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+      localStorage.setItem("storedList", JSON.stringify(tdList));
     }
 
-    if (this.state.filter.descentPriority) {
+    if (filter.descentPriority) {
       const priorities = {
         "High": 0,
         "Medium": 1,
         "Low": 2
       };
 
-      this.state.tdList.sort((a, b) => {
+      tdList.sort((a, b) => {
         const priorityA = priorities[a.priority];
         const priorityB = priorities[b.priority];
         if (priorityA < priorityB) {
@@ -278,16 +305,16 @@ class ToDoList extends Component {
         }
         return 0;
       });
-      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+      localStorage.setItem("storedList", JSON.stringify(tdList));
     }
 
-    if (this.state.filter.checked) {
+    if (filter.checked) {
       const priorities = {
         true: 0,
         false: 1
       };
 
-      this.state.tdList.sort((a, b) => {
+      tdList.sort((a, b) => {
         const priorityA = priorities[a.isFinished];
         const priorityB = priorities[b.isFinished];
         if (priorityA < priorityB) {
@@ -298,16 +325,16 @@ class ToDoList extends Component {
         }
         return 0;
       });
-      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+      localStorage.setItem("storedList", JSON.stringify(tdList));
     }
 
-    if (this.state.filter.notChecked) {
+    if (filter.notChecked) {
       const priorities = {
         true: 0,
         false: 1
       };
 
-      this.state.tdList.sort((a, b) => {
+      tdList.sort((a, b) => {
         const priorityA = priorities[a.isFinished];
         const priorityB = priorities[b.isFinished];
         if (priorityA > priorityB) {
@@ -318,16 +345,16 @@ class ToDoList extends Component {
         }
         return 0;
       });
-      localStorage.setItem("storedList", JSON.stringify(this.state.tdList));
+      localStorage.setItem("storedList", JSON.stringify(tdList));
     }
 
     return (
       <>
         <section className={"row row__tdList"}>
           <ul className={"tdList"}>
-            <TDHeader handleAtParentSort={this.sort} activeFilter={this.state.filter}/>
+            <TDHeader handleAtParentSort={this.sort} activeFilter={filter}/>
             {
-              this.state.viewedTDList.map((task,index) => {
+              viewedTDList.map((task,index) => {
                 return (
                   <TDElement  key={index} 
                               task={task} 
@@ -339,7 +366,7 @@ class ToDoList extends Component {
                 )
               })
             }
-            <TDPagination tdList={this.state.tdList} handleAtParent={viewedTasks => this.changeView(viewedTasks)} ref={this.paginationRef}/>
+            <TDPagination tdList={tdList} handleAtParent={viewedTasks => this.changeView(viewedTasks)} ref={this.paginationRef}/>
           </ul>
         </section>
       </>
