@@ -8,7 +8,8 @@ class TDElement extends Component {
     super(props);
     this.state = {
       checked: this.props.task.isFinished,
-      priority: this.props.task.priority
+      priority: this.props.task.priority,
+      deleteAreYouSure: false
     }
   }
 
@@ -23,8 +24,14 @@ class TDElement extends Component {
 
   deleteTask = e => {
     if (this.state.checked === false) {
-      return false;
-    } else {
+      if (this.state.deleteAreYouSure === true) {
+        const index = e.target.getAttribute("data-key");
+        this.props.handleAtParentDelete(index);
+      }
+      this.setState({
+        deleteAreYouSure: true
+      })
+    } else {    
     const index = e.target.getAttribute("data-key");
     this.props.handleAtParentDelete(index);
     }
@@ -35,7 +42,8 @@ class TDElement extends Component {
     this.props.handleAtParentIsFinished(index, e.target.checked);
 
     this.setState({
-      [e.target.name]: e.target.checked
+      [e.target.name]: e.target.checked,
+      deleteAreYouSure: false
     })
   }
 
@@ -44,7 +52,8 @@ class TDElement extends Component {
     this.props.handleAtParentPriority(index, e.target.value);
 
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      deleteAreYouSure:false
     })
   }
 
@@ -65,6 +74,7 @@ class TDElement extends Component {
                     checked={this.state.checked}
                     className={"col-2"}
             />
+            {this.state.deleteAreYouSure ? <p>Still not done, are you sure you want to delete it?</p> : null}
             <button type={"button"}
                     data-key={this.props.index}
                     onClick={e => this.deleteTask(e)}
