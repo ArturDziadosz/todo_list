@@ -1,11 +1,11 @@
 <h1 align="center">Hi 👋, I'm Artur</h1><br/>
-<h2 align="center">and this is a to do list with usage of local storage - React.js</h3><br/>
+<h2 align="center">and this is a to do list with usage of local storage - React.js</h2><br/>
 
-#
+<br/>
 
-## <><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Simple ul list that shows TODO list'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Task contains name, priority and checkbox input'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Header row allow user to sort the list ascending and descending'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Priority and Done column are editable'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<User may delete task, but only that one that is finished :smile: - just hover that task and you will see bin icon'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<List is pageable (5, 10, 15 tasks per page)'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Simple form for adding new rows with validation'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<TODO list is stored in local storage, is updated after adding, editing and deleting tasks`><br/></>
+### <><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Simple ul list that shows TODO list'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Task contains name, priority and checkbox input'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Header row allow user to sort the list ascending and descending'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Priority and Done column are editable'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<User may delete task, but only that one that is finished :smile: <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; just hover that task and you will see bin icon'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<List is pageable (5, 10, 15 tasks per page)'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Simple form for adding new rows with validation'><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<TODO list is stored in local storage, is updated after adding, editing and deleting tasks`><br/></>
     
-#
+<br/>
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> 
@@ -18,15 +18,11 @@
 <a href="https://sass-lang.com" target="_blank"> <img src="https://devicons.github.io/devicon/devicon.git/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/> </a> 
 </p>
 
-<br/>
-
 #
 
 <h3 align="left">Dependencies:</h3>
 
 ### ``react`` &nbsp;&nbsp; ``@material-ui`` &nbsp;&nbsp; ``gh-pages`` &nbsp;&nbsp; ``node-sass`` &nbsp;&nbsp; ``react-scroll`` 
-
-<br/>
 
 #
 
@@ -35,8 +31,6 @@
 ## [To do list - React.js](https://arturdziadosz.github.io/todo_list/)
 
 <br/>
-
-#
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
