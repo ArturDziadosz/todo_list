@@ -1,3 +1,5 @@
+@import "../../styles/settings/variables";
+
 main.container {
   .row__tdList {
     .tdList {
@@ -8,29 +10,96 @@ main.container {
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid $colorTableBorder;
 
-        .tdList__element__deleteBtn {
+        .element__text {
+          padding: 0 15px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .element__priority {
+          margin: 5px 15px;
+          border: none;
+          background-color: #fff;
+          height: 40px;
+          cursor: pointer;
+          appearance: none;
+          font-size: $fontSize;
+          font-family: $font;
+          line-height: $lineHeight;
+          font-weight: $fontWeight;
+          padding: 0 5px;
+
+          &:focus {
+            outline: 1px solid $colorTableBorder;
+          }
+
+          &:hover {
+              animation: ColorsBlackGrey 500ms infinite linear alternate;
+          }
+        }
+
+        .element__done {
+          padding: 0 5px;
+          display: flex;
+
+          .element__done__btn {
+            cursor: pointer;
+            appearance: none;
+            outline: none;
+
+            &:before {
+              // border: 1px solid $colorTableBorder;
+              box-shadow: 0 0 2px 3px $colorTableBorder;
+              border-radius: 2px;
+              content: "";
+              display: inline-block;
+              height: 14px;
+              vertical-align: top;
+              width: 14px;
+            }
+
+            &:checked {
+              &:before {
+                background: $colorSecondary;
+                box-shadow: 0 0 2px 1px $colorSecondary;
+                color: #fff;
+                content: "\2714";
+                text-align: center;
+              }
+            }
+
+            &:focus {
+              outline: 1px solid $colorTableBorder;
+            }
+          }
+        }
+      
+        .element__btn--delete {
           display: none;
           position: absolute;
           right: 0;
-          bottom: 10px;
+          bottom: 0;
           margin: 5px;
+          height: 40px;
         }
 
         &:hover {
-          .tdList__element__deleteBtn {
+          .element__btn--delete {
             display: block;
+            background-color: $colorTableBorder;
           }
         }
 
         .tdList__element__warning {
           position: absolute;
           background-color: #fff;
-          color: red;
-          border: 1px solid red;
+          color: $colorSecondary;
           left: 0;
           text-align: center;
+          font-weight: 700;
         }
       }
 
@@ -38,6 +107,71 @@ main.container {
         p {
           text-decoration: line-through;
           opacity: 0.5;
+        }
+      }
+
+      .tdList__element--new {
+        animation: FadeIn 1s linear forwards;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  main.container {
+    .row__tdList {
+      .tdList {
+        .tdList__element {
+          .element__btn--delete {
+            min-width: 46px;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  main.container {
+    .row__tdList {
+      .tdList {
+        .tdList__element {
+          .element__btn--delete {
+            min-width: 35px;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  main.container {
+    .row__tdList {
+      .tdList {
+        .tdList__element {
+          .element__text {
+            width: 50%;
+          }
+
+          .element__priority {
+            width: 25%;
+          }
+
+          .element__done {
+            width: 25%;
+          }
+
+          .element__btn--delete {
+            min-width: 10%;
+          }
+        }
+        .tdList__element__warning {
+          line-height: 25px;
+          width: 75%;
+          padding: 0 20px;
         }
       }
     }

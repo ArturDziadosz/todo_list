@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import './TDElement.scss';
 
+import {Button} from '@material-ui/core';
+
 class TDElement extends Component {
 
   constructor(props) {
@@ -67,28 +69,30 @@ class TDElement extends Component {
     return (
       <>
         <li className={checked ? "tdList__element tdList__element--checked" : "tdList__element"} >
-            <p className={"col-8"}>{this.props.task.text}</p>
-            <select className={"col-2"} name={"priority"} data-key={this.props.index} onChange={e => this.handleChangePriority(e)} value={priority}>
+            <p className={"col-8 element__text"}>{this.props.task.text}</p>
+            <select className={"col-2 element__priority"} name={"priority"} data-key={this.props.index} onChange={e => this.handleChangePriority(e)} value={priority}>
               <option value={"Low"}>Low</option>
               <option value={"Medium"}>Medium</option>
               <option value={"High"}>High</option>
             </select>
-            <input  type={"checkbox"} 
-                    name={"checked"} 
-                    onChange={e => this.handleChangeFinished(e)} 
-                    data-key={this.props.index}
-                    checked={checked}
-                    className={"col-2"}
-                    value={checked}
-            />
+            <div className={"col-2 element__done"}>
+              <input  type={"checkbox"} 
+                      name={"checked"} 
+                      onChange={e => this.handleChangeFinished(e)} 
+                      data-key={this.props.index}
+                      checked={checked}
+                      className={"element__done__btn"}
+                      value={checked}
+              />
+            </div>
             {deleteAreYouSure ? <p className={"tdList__element__warning col-10"}>Still not done, are you sure you want to delete it?</p> : null}
-            <button type={"button"}
+            <Button type={"button"}
                     data-key={this.props.index}
                     onClick={e => this.deleteTask(e)}
-                    className={"tdList__element__deleteBtn"}        
+                    className={"element__btn element__btn--delete"}     
             >
                 <i className="fas fa-trash-alt" data-key={this.props.index} />
-            </button>
+            </Button>
         </li>
       </>
     )
