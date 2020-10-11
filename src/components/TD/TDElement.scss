@@ -11,6 +11,7 @@ main.container {
         justify-content: center;
         align-items: center;
         border-bottom: 1px solid $colorTableBorder;
+        animation: FadeIn linear 1s;
 
         .element__text {
           padding: 0 15px;
@@ -22,7 +23,7 @@ main.container {
         .element__priority {
           margin: 5px 15px;
           border: none;
-          background-color: #fff;
+          background-color: transparent;
           height: 40px;
           cursor: pointer;
           appearance: none;
@@ -108,10 +109,6 @@ main.container {
           text-decoration: line-through;
           opacity: 0.5;
         }
-      }
-
-      .tdList__element--new {
-        animation: FadeIn 1s linear forwards;
       }
     }
   }

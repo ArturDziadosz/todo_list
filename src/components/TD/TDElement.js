@@ -36,8 +36,8 @@ class TDElement extends Component {
         deleteAreYouSure: true
       })
     } else {    
-    const id = e.target.getAttribute("data-key");
-    this.props.handleAtParentDelete(id);
+        const id = e.target.getAttribute("data-key");
+        this.props.handleAtParentDelete(id);
     }
   }
 
@@ -68,14 +68,19 @@ class TDElement extends Component {
 
     return (
       <>
-        <li className={checked ? "tdList__element tdList__element--checked" : "tdList__element"} >
+        <li className={checked ? "tdList__element tdList__element--checked" : "tdList__element"}>
             <p className={"col-8 element__text"}>{this.props.task.text}</p>
-            <select className={"col-2 element__priority"} name={"priority"} data-key={this.props.task.id} onChange={e => this.handleChangePriority(e)} value={priority}>
+            <select className={"col-2 element__priority"} 
+                    name={"priority"} 
+                    data-key={this.props.task.id} 
+                    onChange={e => this.handleChangePriority(e)} 
+                    value={priority}
+            >
               <option value={"Low"}>Low</option>
               <option value={"Medium"}>Medium</option>
               <option value={"High"}>High</option>
             </select>
-            <div className={"col-2 element__done"}>
+            <div className={"col-2 element__done"} >
               <input  type={"checkbox"} 
                       name={"checked"} 
                       onChange={e => this.handleChangeFinished(e)} 
@@ -89,7 +94,7 @@ class TDElement extends Component {
             <Button type={"button"}
                     data-key={this.props.task.id}
                     onClick={e => this.deleteTask(e)}
-                    className={"element__btn element__btn--delete"}     
+                    className={"element__btn element__btn--delete"}   
             >
                 <i className="fas fa-trash-alt" data-key={this.props.task.id} />
             </Button>
