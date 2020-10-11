@@ -56,20 +56,20 @@ class TDHeader extends Component {
     return (
       <>
         <li className={"tdList__header"}>
-          <div className={"col-8"}>
-            <p onClick={e => this.handleSort(e)} data-sort={"za"}>Task Name</p>
-            <p style={this.state.activeFilter.azFilter ? {"display": "block"} : {"display": "none"}}>AZ</p>
-            <p style={this.state.activeFilter.zaFilter ? {"display": "block"} : {"display": "none"}}>ZA</p>
+          <div className={"col-8 header__text"}>
+            <span onClick={e => this.handleSort(e)} data-sort={"za"}>Task Name</span>
+            <i className={"header__text__filter fas fa-sort-alpha-down"} style={this.state.activeFilter.azFilter ? {"display": "block"} : {"display": "none"}} />
+            <i className={"header__text__filter fas fa-sort-alpha-down-alt"} style={this.state.activeFilter.zaFilter ? {"display": "block"} : {"display": "none"}} />
           </div>
-          <div className={"col-2"}>
-            <p onClick={e => this.handleSort(e)} data-sort={"descent"}>Priority</p>
-            <p style={this.state.activeFilter.ascentPriority ? {"display": "block"} : {"display": "none"}}>ascent</p>
-            <p style={this.state.activeFilter.descentPriority ? {"display": "block"} : {"display": "none"}}>descent</p>
+          <div className={"col-2 header__priority"}>
+            <span onClick={e => this.handleSort(e)} data-sort={"descent"}>Priority</span>
+            <i className={"header__priority__filter fas fa-sort-amount-down-alt"} style={this.state.activeFilter.ascentPriority ? {"display": "block"} : {"display": "none"}} />
+            <i className={"header__priority__filter fas fa-sort-amount-down"} style={this.state.activeFilter.descentPriority ? {"display": "block"} : {"display": "none"}} />
           </div>
-          <div className={"col-2"}>
-            <p onClick={e => this.handleSort(e)} data-sort={"notChecked"}>Done</p>
-            <p style={this.state.activeFilter.checked ? {"display": "block"} : {"display": "none"}}>V</p>
-            <p style={this.state.activeFilter.notChecked ? {"display": "block"} : {"display": "none"}}>Not</p>
+          <div className={"col-2 header__done"}>
+            <span onClick={e => this.handleSort(e)} data-sort={"notChecked"}>Done</span>
+            <i className={"header__done__filter fas fa-check"} style={this.state.activeFilter.checked ? {"display": "block"} : {"display": "none"}} />
+            <i className={"header__done__filter fas fa-times"} style={this.state.activeFilter.notChecked ? {"display": "block"} : {"display": "none"}} />
           </div>
         </li>
       </>

@@ -1,3 +1,5 @@
+@import "../../styles/settings/variables";
+
 main.container {
   .row__tdList {
     .tdList {
@@ -6,6 +8,68 @@ main.container {
         justify-content: center;
         align-items: center;
         background-color: grey;
+        line-height: 50px;
+        color: #fff;
+        background-color: $colorMain;
+
+        .header__text {
+          padding: 0 15px;
+          position: relative;
+          display: flex;
+          align-items: center;
+
+          .header__text__filter {
+          margin-left: 10px;
+          font-size: 1.5em;
+          }
+        }
+
+        .header__priority {
+          margin: 0 15px;
+          padding: 0 5px;
+          position: relative;
+          display: flex;
+          align-items: center;
+
+          .header__priority__filter {
+            margin-left: 10px;
+            font-size: 1.5em;
+            }
+        }
+
+        .header__done {
+          padding: 0 5px;
+          position: relative;
+          display: flex;
+          align-items: center;
+
+          .header__done__filter {
+            margin-left: 10px;
+            font-size: 1.5em;
+            }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  main.container {
+    .row__tdList {
+      .tdList {
+        .tdList__header {
+          .header__text {
+            width: 50%;
+          }
+
+          .header__priority {
+            width: 25%;
+          }
+
+          .header__done {
+            width: 25%;
+          }
+        }
       }
     }
   }
