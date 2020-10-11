@@ -25,26 +25,26 @@ class TDElement extends Component {
     }
   }
 
-  // passing index of element to parent to delete task, with validation if it's finished
+  // passing id of element to parent to delete task, with validation if it's finished
   deleteTask = e => {
     if (this.state.checked === false) {
       if (this.state.deleteAreYouSure === true) {
-        const index = e.target.getAttribute("data-key");
-        this.props.handleAtParentDelete(index);
+        const id = e.target.getAttribute("data-key");
+        this.props.handleAtParentDelete(id);
       }
       this.setState({
         deleteAreYouSure: true
       })
     } else {    
-    const index = e.target.getAttribute("data-key");
-    this.props.handleAtParentDelete(index);
+    const id = e.target.getAttribute("data-key");
+    this.props.handleAtParentDelete(id);
     }
   }
 
   // handler for changing the finished status (true, false)
   handleChangeFinished = e => {
-    const index = e.target.getAttribute("data-key");
-    this.props.handleAtParentIsFinished(index, e.target.checked);
+    const id = e.target.getAttribute("data-key");
+    this.props.handleAtParentIsFinished(id, e.target.checked);
 
     this.setState({
       [e.target.name]: e.target.checked,
@@ -54,8 +54,8 @@ class TDElement extends Component {
 
   // handler for changing priority
   handleChangePriority = e => {
-    const index = e.target.getAttribute("data-key");
-    this.props.handleAtParentPriority(index, e.target.value);
+    const id = e.target.getAttribute("data-key");
+    this.props.handleAtParentPriority(id, e.target.value);
 
     this.setState({
       [e.target.name]: e.target.value,
@@ -70,7 +70,7 @@ class TDElement extends Component {
       <>
         <li className={checked ? "tdList__element tdList__element--checked" : "tdList__element"} >
             <p className={"col-8 element__text"}>{this.props.task.text}</p>
-            <select className={"col-2 element__priority"} name={"priority"} data-key={this.props.index} onChange={e => this.handleChangePriority(e)} value={priority}>
+            <select className={"col-2 element__priority"} name={"priority"} data-key={this.props.task.id} onChange={e => this.handleChangePriority(e)} value={priority}>
               <option value={"Low"}>Low</option>
               <option value={"Medium"}>Medium</option>
               <option value={"High"}>High</option>
@@ -79,7 +79,7 @@ class TDElement extends Component {
               <input  type={"checkbox"} 
                       name={"checked"} 
                       onChange={e => this.handleChangeFinished(e)} 
-                      data-key={this.props.index}
+                      data-key={this.props.task.id}
                       checked={checked}
                       className={"element__done__btn"}
                       value={checked}
@@ -87,11 +87,11 @@ class TDElement extends Component {
             </div>
             {deleteAreYouSure ? <p className={"tdList__element__warning col-10"}>Still not done, are you sure you want to delete it?</p> : null}
             <Button type={"button"}
-                    data-key={this.props.index}
+                    data-key={this.props.task.id}
                     onClick={e => this.deleteTask(e)}
                     className={"element__btn element__btn--delete"}     
             >
-                <i className="fas fa-trash-alt" data-key={this.props.index} />
+                <i className="fas fa-trash-alt" data-key={this.props.task.id} />
             </Button>
         </li>
       </>

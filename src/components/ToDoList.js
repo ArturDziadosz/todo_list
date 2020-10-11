@@ -5,6 +5,8 @@ import TDHeader from './TD/TDHeader';
 import TDElement from './TD/TDElement';
 import TDPagination from './TD/TDPagination';
 
+import {v4 as uuidv4} from "uuid";
+
 class ToDoList extends Component {
 
   constructor(props) {
@@ -63,6 +65,7 @@ class ToDoList extends Component {
 
     // new task has text, priority and it's not finished by default 
     const task = {
+      id: uuidv4(),
       text: this.props.newlyAddedTask.inputValue,
       priority: this.props.newlyAddedTask.priority,
       isFinished: false
@@ -86,8 +89,9 @@ class ToDoList extends Component {
   }
 
   // deleting task with splice method and updating state and local storage
-  deleteTask = index => {
+  deleteTask = id => {
     const storedList = JSON.parse(localStorage.getItem("storedList"));
+    const index = storedList.findIndex(task => task.id === id);
     storedList.splice(index,1);
     this.setState({
       tdList: storedList
@@ -96,8 +100,9 @@ class ToDoList extends Component {
   }
 
   // toggling the checkbox status with updating state and local storage
-  toggleFinishTask = (index, boolean) => {
+  toggleFinishTask = (id, boolean) => {
     const storedList = JSON.parse(localStorage.getItem("storedList"));
+    const index = storedList.findIndex(task => task.id === id);
     storedList[index].isFinished = boolean;
     this.setState({
       tdList: storedList
@@ -106,8 +111,9 @@ class ToDoList extends Component {
   }
 
   // changing the priority of task with updating state and local storage
-  changePriority = (index, priority) => {
-    const storedList = JSON.parse(localStorage.getItem("storedList"));
+  changePriority = (id, priority) => {
+    const storedList = JSON.parse(localStorage.getItem("storedList"))
+    const index = storedList.findIndex(task => task.id === id);
     storedList[index].priority = priority;
     this.setState({
       tdList: storedList
@@ -356,12 +362,12 @@ class ToDoList extends Component {
             {
               viewedTDList.map((task,index) => {
                 return (
-                  <TDElement  key={index} 
+                  <TDElement  key={task.id} 
                               task={task} 
                               index={index} 
-                              handleAtParentDelete={index => this.deleteTask(index)} 
-                              handleAtParentIsFinished={(index, boolean) => this.toggleFinishTask(index, boolean)} 
-                              handleAtParentPriority={(index, priority) => this.changePriority(index, priority)}
+                              handleAtParentDelete={id => this.deleteTask(id)} 
+                              handleAtParentIsFinished={(id, boolean) => this.toggleFinishTask(id, boolean)} 
+                              handleAtParentPriority={(id, priority) => this.changePriority(id, priority)}
                   />
                 )
               })
