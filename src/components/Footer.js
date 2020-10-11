@@ -16,7 +16,7 @@ class Footer extends Component {
             <p className={"col-11 footer__text"}>Designed by <a href={"https://github.com/ArturDziadosz"} target={"_blank"}
                rel={"noopener noreferrer"}>Artur Dziadosz</a></p>
             <Link to={"header"} smooth={true} duration={500}>
-              <Button className={"col-1"}>
+              <Button className={"col-1"} variant={"contained"} color={"primary"}>
                 <i className="fas fa-level-up-alt"/>
               </Button>
             </Link>
