@@ -1,11 +1,13 @@
+@import '../styles/settings/variables';
+
 main.container {
   .row__tdList {
     .tdList {
       list-style: none;
       width: 100%;
       margin: 20px 0;
-      border: 1px solid black;
-      border-radius: 5px 5px;
+      border: 1px solid $colorTableBorder;
+      box-shadow: 0px 0px 0px 5px lighten($colorTableBorder, $amount: 10%);
     }
   }
 }
