@@ -5,7 +5,56 @@ main.container {
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          background-color: grey;
+          line-height: 50px;
+
+          .footer__text {
+            line-height: 50px;
+            margin: 0 10px;
+
+            .footer__text__perPage {
+              margin-left: 10px;
+              border: none;
+              background-color: #fff;
+              width: 60px;
+            }
+          }
+
+          .footer__btn {
+            height: 40px;
+            margin: 5px 10px;
+            min-width: 30px;
+            padding: 0;
+
+            &:first-of-type {
+              margin-right: 0;
+            }
+
+            &:last-of-type {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    main.container {
+      .row__tdList {
+        .tdList {
+          .tdList__footer {
+            .footer__text {
+              margin: 0;
+
+              .footer__text__perPage {
+                margin-right: 5px;
+                width: 40px;
+              }
+            }
+            .footer__btn {
+              min-width: 20px;
+            }
+          }
         }
       }
     }

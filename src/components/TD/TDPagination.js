@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import './TDPagination.scss';
 
+import {Button} from "@material-ui/core";
+
 class TDPagination extends Component {
 
   constructor(props) {
@@ -78,16 +80,23 @@ class TDPagination extends Component {
     return (
       <>
         <li className={"tdList__footer"}>
-          <p>Rows per page: 
-            <select name={"tasksPerPage"} onChange={e => this.handleChange(e)} value={tasksPerPage}>
+          <p className={"footer__text"}>Rows per page: 
+            <select name={"tasksPerPage"} 
+                    onChange={e => this.handleChange(e)} 
+                    value={tasksPerPage}
+                    className={"footer__text__perPage"}>
               <option value={"5"}>5</option>
               <option value={"10"}>10</option>
               <option value={"15"}>15</option>
             </select>
           </p>
-          <p>{tdList.length === 0 ? indexOfFirst : indexOfFirst+1} - {indexOfLastTask} of {tdList.length}</p>
-          <button onClick={e => this.handlePageDown(e)}>{"<"}</button>
-          <button onClick={e => this.handlePageUp(e)}>{">"}</button>
+          <p className={"footer__text"}>{tdList.length === 0 ? indexOfFirst : indexOfFirst+1} - {indexOfLastTask} of {tdList.length}</p>
+          <Button className={"footer__btn"} onClick={e => this.handlePageDown(e)}>
+            <i className="fas fa-chevron-left"></i>
+          </Button>
+          <Button className={"footer__btn"} onClick={e => this.handlePageUp(e)}>
+            <i className="fas fa-chevron-right"></i>
+          </Button>
         </li>
       </>
     )
