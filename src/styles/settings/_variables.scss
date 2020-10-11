@@ -1,11 +1,34 @@
 // Colors
-$colorBG: skyblue;
+$colorBG: #fff;
+$colorTableBorder: lightgrey;
+$colorMain: #494430;
+$colorSecondary: #f69a2f;
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 $font: 'Lato', sans-serif;
-$fontSize: 16px;
-$lineHeight: 24px;
+$fontSize: 14px;
+$fontSizeMobile: 10px;
+$lineHeight: 20px;
 $fontWeight: 400;
 
 // Animations
+@keyframes FadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes ColorsBlackGrey {
+    from {
+        color: #000
+    }
+
+    to {
+        color: grey
+    }
+}
