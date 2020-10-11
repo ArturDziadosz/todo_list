@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './Form.scss';
 
-import {TextField, Button} from '@material-ui/core';
+import {TextField, Button, InputLabel, FormControl, Select, MenuItem} from '@material-ui/core';
 
 class Form extends Component {
 
@@ -38,7 +38,7 @@ class Form extends Component {
     return (
       <>
         <form className={"row row__form"} onSubmit={e => this.handleSubmit(e)}>
-          <TextField  className={"col-8"} 
+          <TextField  className={"col-8 form__text"} 
                       variant={"outlined"}
                       autoFocus={true}
                       label={"Add new task"}
@@ -46,12 +46,21 @@ class Form extends Component {
                       onChange={e => this.handleChange(e)}
                       value={this.state.inputValue}
                       type={"text"} />
-          <select className={"col-2"} name={"priority"} onChange={e => this.handleChange(e)} value={this.state.priority}>
-            <option value={"Low"}>Low</option>
-            <option value={"Medium"}>Medium</option>
-            <option value={"High"}>High</option>
-          </select>
-          <Button className={"col-2"} variant={"contained"} color={"primary"} type={"submit"}>
+          <FormControl variant={"outlined"} className={"col-3 form__priority"} > 
+            <InputLabel id={"demo-simple-select-outlined-label"}>Priority</InputLabel>
+            <Select labelId={"demo-simple-select-outlined-label"}
+                    id={"demo-simple-select-outlined"} 
+                    label={"Priority"}
+                    name={"priority"} 
+                    onChange={e => this.handleChange(e)} 
+                    value={this.state.priority}
+            >
+              <MenuItem value={"Low"}>Low</MenuItem>
+              <MenuItem value={"Medium"}>Medium</MenuItem>
+              <MenuItem value={"High"}>High</MenuItem>
+            </Select>
+          </FormControl>
+          <Button className={"col-1 form__btn"} variant={"contained"} color={"primary"} type={"submit"}>
             <i className="fas fa-plus"></i>
           </Button>
         </form>

@@ -1,13 +1,40 @@
+@import "../styles/settings/variables";
+
 main.container {
   .row__form {
-    div {
-
+    .MuiFormLabel-root.Mui-focused {
+      color: $colorSecondary;
     }
-    select {
 
+    .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: $colorSecondary;
     }
-    button {
 
+    .form__btn {
+      background-color: $colorMain;
+      height: 56px;
+
+      i {
+        font-size : 1.8em;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  main.container {
+    .row__form {
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .form__text {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .form__priority {
+        width: 70%;
+      }
     }
   }
 }
