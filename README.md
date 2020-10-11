@@ -22,7 +22,7 @@
 
 <h3 align="left">Dependencies:</h3>
 
-### ``react`` &nbsp;&nbsp; ``@material-ui`` &nbsp;&nbsp; ``gh-pages`` &nbsp;&nbsp; ``node-sass`` &nbsp;&nbsp; ``react-scroll`` ``uuid``
+### ``react`` &nbsp;&nbsp; ``@material-ui`` &nbsp;&nbsp; ``gh-pages`` &nbsp;&nbsp; ``node-sass`` &nbsp;&nbsp; ``react-scroll`` &nbsp;&nbsp; ``uuid``
 
 #
 
